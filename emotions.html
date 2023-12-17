@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+    <title>Emotion detection demo</title>
+    <script src="emotions.js"></script>
+</head>
+
+<body>
+    <div>
+        <h2>Emotion detection demo</h2>
+        
+        <div style="padding-bottom: 20px;">Please choose the photo for emotion detection</div>
+        <input type="file" name="photo" onchange="javascript:detect_emotions()"/>
+        <div id="detect-result" style="display: none; font-family: monospace; background-color: #606a94; color: white; margin-top: 20px; max-width: 600px; padding: 10px;"></div>
+    </div>
+</body>
+
+<script>
+function detect_emotions(){
+    var photo = document.getElementsByName("photo")[0].files[0];
+    
+    emotions(photo, function(result){
+        document.getElementById("detect-result").innerHTML = JSON.stringify(result, null, 8)
+            .replace(/\ /g, "&nbsp;")
+            .replace(/\n/g, "<br/>")
+
+        document.getElementById("detect-result")["style"]["display"] = "block"
+    });
+}
+</script>
+
+</html>
